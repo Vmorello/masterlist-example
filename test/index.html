@@ -4,6 +4,7 @@
 <head>
     <title></title>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
 
     <link href="styles/overrides.css" rel="stylesheet">
@@ -13,6 +14,8 @@
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="app.js"></script>
+    <script src="bower_components/everlive/min/everlive.all.min.js"></script>
+    <script src="dataProviders/test.js"></script>
 </head>
 
 <body id="kendoUiMobileApp">
@@ -33,21 +36,8 @@
     </div>
 
 
-    <div id="navigation-show-more-view">
-        <header class="km-header">
-            <div class="header-text km-widget km-navbar">
-                <div class="km-leftitem">
-                    <a class="km-widget km-button km-back" id="more-view-back">
-                        <span class="km-text">Back</span>
-                    </a>
-                </div>
-                <div class="km-view-title">
-                    <span>Show More</span>
-                </div>
-            </div>
-        </header>
-
-        <ul data-role="listview" data-style="inset" class="km-widget km-listview km-list km-listinset">
+    <div id="navigation-show-more-view" data-role="view" data-title="Show More" data-layout="main">
+        <ul data-role="listview" data-style="inset" data-click="app.listViewClick">
         </ul>
     </div>
 

@@ -15,6 +15,23 @@
         });
     };
 
+    $(document).ready(function() {
+        var navigationShowMoreView = $('#navigation-show-more-view').find('ul'),
+            allItems = $('#navigation-container-more').find('a'),
+            navigationShowMoreContent = '';
+
+        allItems.each(function(index) {
+            navigationShowMoreContent += '<li>' + allItems[index].outerHTML + '</li>';
+        });
+
+        navigationShowMoreView.html(navigationShowMoreContent);
+    });
+
+    app.listViewClick = function _listViewClick(item) {
+        var tabstrip = app.mobileApp.view().footer.find('.km-tabstrip').data('kendoMobileTabStrip');
+        tabstrip.clear();
+    };
+
     if (window.cordova) {
         document.addEventListener('deviceready', function() {
             if (navigator && navigator.splashscreen) {
@@ -54,37 +71,35 @@
         }
     };
 
-    app.onShowMore = function() {
-        var navigation_show_more_view = $("#navigation-show-more-view");
+    // start kendo binders
+    // end kendo binders
+    app.showFileUploadName = function(itemViewName) {
+        $('.' + itemViewName).off('change', 'input[type=\'file\']').on('change', 'input[type=\'file\']', function(event) {
+            var target = $(event.target),
+                inputValue = target.val(),
+                fileName = inputValue.substring(inputValue.lastIndexOf('\\') + 1, inputValue.length);
 
-        navigation_show_more_view.find("ul").html($("#navigation-container-more").html());
-
-        navigation_show_more_view.find("ul a").each(function(index) {
-            var icon = '<span class="km-icon km-' + $(this).data('icon') + '"></span>',
-                text = '<span class="km-text">' + $(this).text() + '</span>';
-
-            $(this).html(icon + text).addClass('km-listview-link').attr('data-role', 'listview-link').wrap("<li></li>");
+            $('#' + target.attr('id') + 'Name').text(fileName);
         });
 
-        $("#more-view-back").off("click").on("click", function() {
-            $("#navigation-show-more-view").hide();
-        })
     };
 
-    app.afterShowMore = function() {
-        var navigation_show_more_view = $("#navigation-show-more-view");
+    app.clearFormDomData = function(formType) {
+        $.each($('.' + formType).find('input:not([data-bind]), textarea:not([data-bind])'), function(key, value) {
+            var domEl = $(value),
+                inputType = domEl.attr('type');
 
-        navigation_show_more_view.find("li").off('click touchend').on('click touchend', function() {
-            navigation_show_more_view.hide();
-            $('.km-tabstrip .km-state-active').removeClass('km-state-active');
+            if (domEl.val().length) {
+
+                if (inputType === 'file') {
+                    $('#' + domEl.attr('id') + 'Name').text('');
+                }
+
+                domEl.val('');
+            }
         });
     };
 
-    app.clickMore = function(e) {
-        app.onShowMore();
-        $("#navigation-show-more-view").show();
-        app.afterShowMore();
-    };
 }());
 
 // START_CUSTOM_CODE_kendoUiMobileApp

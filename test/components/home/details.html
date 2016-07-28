@@ -1,4 +1,4 @@
-<div data-role="view" data-title="Details" data-model="app.masterDetailView.masterDetailViewModel" data-bind="events: { show: detailsShow }" id="masterDetailViewModelDetailsView">
+<div data-role="view" data-title="Details" data-model="app.home.homeModel" data-bind="events: { show: detailsShow }" id="homeModelDetailsView">
     <header data-role="header">
         <div data-role="navbar" class="header-text">
             <a data-role="backbutton" data-align="left">Back</a>
@@ -12,14 +12,14 @@
                 <li>
                     <h3 data-bind="text: currentItem.last"></h3></li>
                 <li>
-                    <p data-bind="text: currentItem.name"></p>
+                    <p data-bind="text: currentItem.other"></p>
                 </li>
 
             </ul>
         </div>
     </div>
-    <!-- START_CUSTOM_CODE_masterDetailViewModel -->
+    <!-- START_CUSTOM_CODE_homeModel -->
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
-    <!-- END_CUSTOM_CODE_masterDetailViewModel -->
+    <!-- END_CUSTOM_CODE_homeModel -->
 </div>
